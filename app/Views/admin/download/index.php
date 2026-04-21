@@ -16,39 +16,53 @@
         <div class="alert alert-danger"><i class="fas fa-exclamation-triangle me-2"></i> <?= session()->getFlashdata('error'); ?></div>
     <?php endif; ?>
 
-    <div class="card border-0 shadow-sm">
-        <div class="card-body p-0 table-responsive">
-            <table class="table table-hover mb-0 align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th class="ps-4">No</th>
-                        <th>Judul Dokumen</th>
-                        <th>Kategori Kelompok</th>
-                        <th>File Tersimpan</th>
-                        <th class="text-center">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $i = 1;
-                    foreach ($downloads as $d) : ?>
-                        <tr>
-                            <td class="ps-4"><?= $i++; ?></td>
-                            <td class="fw-bold"><?= esc($d['judul']); ?></td>
-                            <td><span class="badge bg-info text-dark"><?= esc($d['kategori']); ?></span></td>
-                            <td><small class="text-muted"><i class="fas fa-file-alt me-1"></i> <?= esc($d['file_unduhan']); ?></small></td>
-                            <td class="text-center">
-                                <a href="<?= base_url('admin/download/edit/' . $d['id']) ?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
-                                <form action="<?= base_url('admin/download/' . $d['id']) ?>" method="post" class="d-inline">
-                                    <?= csrf_field(); ?>
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Hapus dokumen ini?');"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>No</th>
+                <th>Judul Dokumen</th>
+                <th>Kategori Kelompok</th>
+                <th>File Tersimpan</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1;
+            foreach ($downloads as $d) : ?>
+                <tr>
+                    <td><?= $i++; ?></td>
+
+                    <td><?= esc($d['judul']); ?></td>
+
+                    <td>
+                        <span class="badge bg-info text-dark">
+                            <?= esc($d['kategori']); ?>
+                        </span>
+                    </td>
+
+                    <td>
+                        <?= esc($d['file_unduhan']); ?>
+                    </td>
+
+                    <td>
+                        <a href="<?= base_url('admin/download/edit/' . $d['id']) ?>"
+                            class="btn btn-sm btn-warning">Edit</a>
+
+                        <form action="<?= base_url('admin/download/' . $d['id']) ?>"
+                            method="post" class="d-inline">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit"
+                                class="btn btn-sm btn-danger"
+                                onclick="return confirm('Yakin ingin menghapus?');">
+                                Hapus
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 <?= $this->endSection() ?>

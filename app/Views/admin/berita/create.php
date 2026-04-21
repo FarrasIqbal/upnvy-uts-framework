@@ -25,14 +25,6 @@
         <div class="mb-3">
             <label class="form-label fw-bold">Status Tayang</label>
             <select class="form-select" name="status" required>
-                <option value="aktif" <?= ($berita['status'] == 'aktif') ? 'selected' : '' ?>>Aktif (Tampilkan)</option>
-                <option value="nonaktif" <?= ($berita['status'] == 'nonaktif') ? 'selected' : '' ?>>Nonaktif (Sembunyikan/Draft)</option>
-            </select>
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label fw-bold">Status Tayang</label>
-            <select class="form-select" name="status" required>
                 <option value="aktif">Aktif (Tampilkan)</option>
                 <option value="nonaktif">Nonaktif (Sembunyikan/Draft)</option>
             </select>
