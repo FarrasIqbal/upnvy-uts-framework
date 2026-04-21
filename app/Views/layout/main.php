@@ -218,6 +218,10 @@
 
     <?= $this->renderSection('content') ?>
 
+    <?php
+    $footerSetting = (new \App\Models\PengaturanModel())->first();
+    ?>
+
     <footer class="upn-footer mt-5">
         <div class="container">
             <div class="row">
@@ -225,15 +229,15 @@
                 <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">
                     <h5>UPN "VETERAN" YOGYAKARTA</h5>
 
-                    <h6>KAMPUS I</h6>
-                    <p>Jl. Padjajaran, Sleman, Yogyakarta, Indonesia. 55283</p>
-                    <p>(0274) 486733</p>
-                    <p><a href="mailto:info@upnyk.ac.id">info@upnyk.ac.id</a></p>
+                    <h6 class="fw-bold mb-3">KAMPUS I</h6>
+                    <p class="mb-1" style="font-size: 0.9rem;"><?= esc($footerSetting['kampus_1_alamat']) ?></p>
+                    <p class="mb-1" style="font-size: 0.9rem;"><?= esc($footerSetting['kampus_1_telepon']) ?></p>
+                    <p class="mb-4" style="font-size: 0.9rem;"><?= esc($footerSetting['kampus_1_email']) ?></p>
 
-                    <h6 class="mt-4">KAMPUS II</h6>
-                    <p>Jl. Babarsari 2 Yogyakarta, Indonesia. 55281</p>
-                    <p>(0274) 486733</p>
-                    <p><a href="mailto:info@upnyk.ac.id">info@upnyk.ac.id</a></p>
+                    <h6 class="fw-bold mb-3">KAMPUS II</h6>
+                    <p class="mb-1" style="font-size: 0.9rem;"><?= esc($footerSetting['kampus_2_alamat']) ?></p>
+                    <p class="mb-1" style="font-size: 0.9rem;"><?= esc($footerSetting['kampus_2_telepon']) ?></p>
+                    <p class="mb-1" style="font-size: 0.9rem;"><?= esc($footerSetting['kampus_2_email']) ?></p>
                 </div>
 
                 <div class="col-lg-4 col-md-6 mb-5 mb-lg-0">

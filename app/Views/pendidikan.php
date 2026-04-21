@@ -36,63 +36,24 @@
         </div>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+    <div class="container my-5 py-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
-        <div class="col">
-            <a href="<?= base_url('pendidikan/feb') ?>" class="text-decoration-none">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden faculty-card">
-                    <img src="images/FEB.png" class="card-img-top rounded-0" alt="FEB" style="height: 220px; object-fit: cover;">
-                    <div class="faculty-title-box text-center">
-                        <h6 class="text-white fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px;">FAKULTAS EKONOMI DAN BISNIS</h6>
-                    </div>
+            <?php foreach ($fakultas as $f) : ?>
+                <div class="col">
+                    <a href="<?= base_url('pendidikan/' . $f['slug']) ?>" class="text-decoration-none">
+                        <div class="card h-100 border-0 rounded-0 shadow-sm overflow-hidden" style="border-radius: 8px;">
+                            <img src="<?= base_url('assets/img/fakultas/' . $f['gambar_fakultas']) ?>" class="card-img" style="height: 220px; object-fit: cover;" alt="<?= esc($f['singkatan']) ?>">
+
+                            <div class="card-footer text-white text-center py-3" style="background-color: #1a2a3a; border-top: none;">
+                                <h6 class="mb-0 fw-bold" style="letter-spacing: 0.5px;"><?= strtoupper($f['nama_fakultas']) ?></h6>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
+            <?php endforeach; ?>
 
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden faculty-card">
-                    <img src="images/FISIP.png" class="card-img-top rounded-0" alt="FISIP" style="height: 220px; object-fit: cover;">
-                    <div class="faculty-title-box text-center">
-                        <h6 class="text-white fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px;">FAKULTAS ILMU SOSIAL DAN ILMU POLITIK</h6>
-                    </div>
-                </div>
-            </a>
         </div>
-
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden faculty-card">
-                    <img src="images/FAPET.png" class="card-img-top rounded-0" alt="Fakultas Pertanian" style="height: 220px; object-fit: cover;">
-                    <div class="faculty-title-box text-center">
-                        <h6 class="text-white fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px;">FAKULTAS PERTANIAN</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden faculty-card">
-                    <img src="images/TEKDUS.png" class="card-img-top rounded-0" alt="FTI" style="height: 220px; object-fit: cover;">
-                    <div class="faculty-title-box text-center">
-                        <h6 class="text-white fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px;">FAKULTAS TEKNIK INDUSTRI</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-
-        <div class="col">
-            <a href="#" class="text-decoration-none">
-                <div class="card h-100 border-0 shadow-sm overflow-hidden faculty-card">
-                    <img src="images/FT.png" class="card-img-top rounded-0" alt="FTM" style="height: 220px; object-fit: cover;">
-                    <div class="faculty-title-box text-center">
-                        <h6 class="text-white fw-bold mb-0" style="font-size: 0.85rem; letter-spacing: 0.5px;">FAKULTAS TEKNOLOGI MINERAL DAN ENERGI</h6>
-                    </div>
-                </div>
-            </a>
-        </div>
-
     </div>
 </div>
 <?= $this->endSection(); ?>

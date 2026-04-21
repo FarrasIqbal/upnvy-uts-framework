@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Models\BeritaModel;
 use App\Models\PengumumanModel;
 use App\Models\SejarahModel;
+use App\Models\FakultasModel;
+use App\Models\DownloadModel;
 
 class Home extends BaseController
 {
@@ -27,12 +29,52 @@ class Home extends BaseController
 
     public function pendidikan()
     {
-        return view('pendidikan');
+        $fakultasModel = new FakultasModel();
+        $data = [
+            'tittle' => 'Pendidikan | UPN VETERAN YOGYAKARTA',
+            'fakultas' => $fakultasModel->findAll()
+        ];
+
+        return view('pendidikan', $data);
     }
+
+    public function detailFakultas($slug = null)
+    {
+        $fakultasModel = new FakultasModel();
+        $fakultas = $fakultasModel->where('slug', $slug)->first();
+
+        if (!$fakultas) {
+            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound('Fakultas tidak ditemukan');
+        }
+
+        $data = [
+            'tittle' => $fakultas['singkatan'] . ' | UPN VETERAN YOGYAKARTA',
+            'fakultas' => $fakultas
+        ];
+
+        return view('detail-fakultas', $data);
+    }
+
+
 
     public function download()
     {
-        return view('download');
+        $downloadModel = new DownloadModel();
+        $beritaModel = new BeritaModel();
+
+        $semuaFile = $downloadModel->orderBy('kategori', 'ASC')->orderBy('id', 'DESC')->findAll();
+        $dataGroup = [];
+        foreach ($semuaFile as $file) {
+            $dataGroup[$file['kategori']][] = $file;
+        }
+
+        $data = [
+            'title'       => 'Download | UPN VETERAN YOGYAKARTA',
+            'downloads'   => $dataGroup, // Mengirim data yang sudah dikelompokkan
+            'berita_lain' => $beritaModel->where('status', 'aktif')->orderBy('tanggal', 'DESC')->findAll(5) // Untuk Sidebar
+        ];
+
+        return view('download', $data);
     }
 
     // Tambahkan method ini
@@ -67,14 +109,6 @@ class Home extends BaseController
         return view('semua-berita', $data);
     }
 
-    // Tambahkan method ini
-    public function detailFakultas($slug = null)
-    {
-        // Di sini nantinya Anda bisa melakukan query ke database berdasarkan $slug
-        // $data['fakultas'] = $this->fakultasModel->getFakultas($slug);
-
-        return view('fakultas/feb');
-    }
 
     public function detailPengumuman($slug = null)
     {
